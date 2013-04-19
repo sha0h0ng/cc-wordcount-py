@@ -72,23 +72,23 @@ Just like any Mapreduce job, this contain's mapper.py and reducer.py script.
 	    print '%s\t%s' % (current_word, current_count)
 	    
 * Next upload this to Amazon S3 bucket by creating a folder call something like "pywc" and upload both mapper.py and reducer.py:
-![image](https://github.com/pshken/cc-wordcount-py/blob/master/screenshot/s3.png)
+![image](screenshot/s3.png)
 
 * Then launch Amazon's Elastic MapReduce and create a new job, select "Run your own application", "Streaming" and click "Continue":
-![image](https://github.com/pshken/cc-wordcount-py/blob/master/screenshot/mr1.png)
+![image](screenshot/mr1.png)
 
 * On the next page, for "Input Location" put `aws-publicdatasets/common-crawl/parse-output/segment/1341690169105/textData-00112` and for "Output Location", "Mapper" and "Reducer", you have to point to your S3 bucket which is "pywc/[filename]". Lastly for "Extra Args", you will enter `-inputformat SequenceFileAsTextInputFormat` which tell the job the format is the inputfile stored in so it can read.
 
 * Next, you select the type and number of Instances to run for your job.
 
 * On the "Adcanced Options" page, you should enable debugging, so that you can track the log if there is any error. You can can store your Logs into your S3 bucket.
-![image](https://github.com/pshken/cc-wordcount-py/blob/master/screenshot/mr2.png)
+![image](screenshot/mr2.png)
 
 * On the next page, select "Proceed with no Bootstrap Actions"
-![image](https://github.com/pshken/cc-wordcount-py/blob/master/screenshot/mr3.png)
+![image](screenshot/mr3.png)
 
 * Finally on the review page, double check every and create a job flow!
-![image](https://github.com/pshken/cc-wordcount-py/blob/master/screenshot/mr4.png)
+![image](screenshot/mr4.png)
 
 The whole process takes about 20 minture and you can see the status from the main console page. After it done, you can "collect" from your S3 bucket.
 
